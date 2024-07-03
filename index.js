@@ -53,7 +53,7 @@ exports.payByWaafiPay = async ({
         },
       };
 
-      const { data } = await axios.post(process.env.MERCHANT_URL, body);
+      const { data } = await axios.post("https://api.waafipay.net/asm", body);
 
       if (data.responseMsg !== "RCS_SUCCESS") {
         let errorMessage = "";
