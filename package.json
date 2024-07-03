@@ -1,14 +1,23 @@
 {
   "name": "evc-plus",
-  "version": "0.0.1",
-  "description": "Evc-Plus Payment",
+  "version": "1.0.0",
+  "description": "A package for formatting phone numbers and processing payments with Evc-Plus",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dhaqane-00/Evc-Plus.git"
+  },
+  "keywords": ["waafipay", "payment", "phone number"],
   "author": "Abdilaahi Dhaqane",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/evc-plus/issues"
+  },
+  "homepage": "https://github.com/yourusername/evc-plus#readme",
   "dependencies": {
-    "axios": "^1.7.2"
+    "axios": "^0.21.1"
   }
 }
