@@ -14,9 +14,9 @@
   "author": "Abdilaahi Dhaqane",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yourusername/evc-plus/issues"
+    "url": "https://github.com/Dhaqane-00/Evc-Plus/issues"
   },
-  "homepage": "https://github.com/yourusername/evc-plus#readme",
+  "homepage": "https://github.com/Dhaqane-00/Evc-Plus#readme",
   "dependencies": {
     "axios": "^0.21.1"
   }
