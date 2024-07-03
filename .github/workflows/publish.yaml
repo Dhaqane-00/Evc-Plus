@@ -1,27 +1,22 @@
 name: Publish Evc-Plus
 
-on:
-  release:
-    types: [created]
+on: push
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 16
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16
-
-    - run: npm install
-
-    - run: npm version patch
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Publish to npm
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: checkout
+        uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          registry-url: 'https://registry.npmjs.org/'
+      - name: Publish to npm
+        run: npm publish --access public
+        working-directory: packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
