@@ -58,7 +58,7 @@ payByWaafiPay({
   console.error(error); // Output: Error object
 });
 ```
-### Using RestFull Api
+### Using Backend
 
 ```javascript
 const jwt = require('jsonwebtoken');
