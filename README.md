@@ -1,140 +1,101 @@
+# Evc-Plus
 
 ![Logo](https://afrotech.so/wp-content/uploads/2019/04/EVC-PLUS-Logo-01-230x128.png)
 
-
-##
-Evc-Plus is an npm package that provides functions for formatting phone numbers and processing payments using WaafiPay.
-
+Evc-Plus is a robust Node.js package that simplifies mobile payment processing through WaafiPay and provides utilities for Somali phone number formatting. Perfect for e-commerce applications and payment integrations in Somalia.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![npm version](https://badge.fury.io/js/evc-plus.svg)](https://www.npmjs.com/package/evc-plus)
 
+## Features
 
+- 📱 **Smart Phone Number Formatting**: Automatically handles Somali phone number formats
+- 💳 **WaafiPay Integration**: Seamless payment processing with WaafiPay
+- ⚡ **Promise-based API**: Modern async/await support
+- 🔒 **Secure**: Built with security best practices
+- 🛠️ **Easy Configuration**: Simple setup with your WaafiPay credentials
 
 ## Installation
 
-Install Evc-plus with npm
+Install via npm:
 
 ```bash
 npm install evc-plus
 ```
-    
-## Features
 
-- **Format Merchant Phone Numbers**: Easily format phone numbers to a standardized format suitable for merchant transactions.
-- **Process Payments with WaafiPay**: Seamlessly integrate with WaafiPay to handle payments, including specifying details such as phone number, amount, merchant UID, and more.
-- **Promise-based API**: Leverage the power of promises for handling asynchronous payment processing, with clear success and error handling.
+## Usage
 
+### Phone Number Formatting
+Use the `formatMerchantPhone` function to format Somali phone numbers to the standard format.
 
-## Usage/Examples
+### Processing Payments
+Use the `payByWaafiPay` function to process payments through WaafiPay.
 
-### Formatting a Phone Number
+### Environment Variables
 
-```javascript
-const { formatMerchantPhone } = require('evc-plus');
+Create a `.env` file in your project root with:
+- MERCHANT_UID
+- API_USER_ID
+- API_KEY
 
-// Format a phone number
-const formattedNumber = formatMerchantPhone('+252 61*******');
-console.log(formattedNumber); // Output: '61******'
+## API Reference
 
-```
-### Processing a Payment
+### formatMerchantPhone(phone: string)
+Formats Somali phone numbers to the standard format.
 
-```javascript
-const { payByWaafiPay } = require('evc-plus');
+**Parameters:**
+- `phone` (string): Phone number in any format
 
-// Process a payment
-payByWaafiPay({
-  phone: formattedNumber,
-  amount: 100,
-  merchantUid: 'M******', //Ask User Provider Like Hormuud
-  apiUserId: "1******",  //Ask User Provider Like Hormuud
-  apiKey: 'API-*******', //Ask User Provider Like Hormuud
-  description: 'Payment description',
-  invoiceId: '12345',
-  referenceId: 'abc123',
-}).then(response => {
-  console.log(response); // Output: Response object
-}).catch(error => {
-  console.error(error); // Output: Error object
-});
-```
-### Using Backend API
+**Returns:**
+- Formatted phone number string
 
-```javascript
-const jwt = require('jsonwebtoken');
-const { payByWaafiPay } = require('evc-plus');
+### payByWaafiPay(options: PaymentOptions)
+Processes a payment through WaafiPay.
 
-module.exports = {
-  createOrder: async (req, res) => {
-    try {
-      const {
-        user,
-        payment,
-        products,
-        total,
-        note,
-        phone,
-      } = req.body;
+**Parameters:**
+- `options` (object):
+  - `phone` (string): Customer's phone number
+  - `amount` (number): Payment amount
+  - `merchantUid` (string): Your merchant UID
+  - `apiUserId` (string): Your API user ID
+  - `apiKey` (string): Your API key
+  - `description?` (string): Payment description
+  - `invoiceId?` (string): Invoice ID
+  - `referenceId?` (string): Reference ID
+  - `currency?` (string): Currency code (default: "USD")
 
-      console.log(phone);
+**Returns:**
+- Promise resolving to `{ status: boolean, message?: string, error?: string }`
 
-      if (payment === "CASH") {
-        const order = await Order({
-          user: user,
-          payment: Payment,
-          products: products,
-          total: total,
-          note: note,
-          phone: phone,
-        }).save();
+## Error Handling
 
-        res.status(201).json(order);
-      } else {
-        const waafiResponse = await payByWaafiPay({
-          phone: phone,
-          amount: total,
-          merchantUid: process.env.merchantUid, //Enter User Api Key
-          apiUserId: process.env.apiUserId,
-          apiKey: process.env.apiKey,
-        });
+The package includes comprehensive error handling:
+- Invalid phone numbers
+- API authentication errors
+- Payment rejection scenarios
+- Network issues
 
-        if (waafiResponse.status) {
-          const order = await Order({
-            user: user,
-            payment,
-            products: products,
-            total: total,
-            note: note,
-            phone: phone,
-          }).save();
+## Contributing
 
-          res.status(201).json(order);
-        } else {
-          // Handling payment failure
-          return res.status(400).send({
-            status: "failed",
-            message: `${waafiResponse.error}` ?? "Payment Failed Try Again",
-          });
-        }
-      }
-    } catch (e) {
-      res.status(400).json({ error: e.message });
-    }
-  },
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-```
-## Configuration
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Ensure you have the correct API credentials set up before using `payByWaafiPay`.
-## Contact
+## License
 
-For support, please contact [Abdilaahi Dhaqane] at [abdilaahimowliid@gmail.com].
+[MIT](https://choosealicense.com/licenses/mit/)
 
+## Support
 
-### Explanation:
+For support or inquiries:
+- 📧 Email: abdilaahimowliid@gmail.com
+- 🐛 Issues: [GitHub Issues](https://github.com/Dhaqane-00/Evc-Plus/issues)
 
-- **Features**: Highlights the key functionalities of the package.
-- **Installation**: Provides a simple command for installation via npm.
-- **Usage**: Includes examples of how to format phone numbers and process payments.
-- **Configuration**: Notes on necessary API credentials.
-- **Contact**: How to reach out for support.
+## Author
+
+**Abdilaahi Dhaqane**
+- GitHub: [@Dhaqane-00](https://github.com/Dhaqane-00)
