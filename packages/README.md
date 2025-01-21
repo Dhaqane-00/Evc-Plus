@@ -1,4 +1,3 @@
-
 ![Logo](https://afrotech.so/wp-content/uploads/2019/04/EVC-PLUS-Logo-01-230x128.png)
 
 
@@ -6,7 +5,9 @@
 Evc-Plus is an npm package that provides functions for formatting phone numbers and processing payments using WaafiPay.
 
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Coverage Status](https://coveralls.io/repos/github/Dhaqane-00/Evc-Plus/badge.svg?branch=main)](https://coveralls.io/github/Dhaqane-00/Evc-Plus?branch=main)
+
 
 
 
